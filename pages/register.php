@@ -1,4 +1,5 @@
 <?php include 'header.php'?>
+<?php include ('../includes/connect.php');?>
 <div class='logup'>
     <form class="form-horizontal" action="register.php" method="post">
         <fieldset>

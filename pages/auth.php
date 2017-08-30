@@ -1,4 +1,5 @@
 <?php include 'header.php'?>
+<?php include ('../includes/connect.php');?>
 <div class="login">
     <div class = "container">
         <div class="wrapper">

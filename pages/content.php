@@ -1,19 +1,7 @@
 <?php
 include 'safemysql.class.php';
-
+include ('/includes/connect.php');
 $query = mysqli_query($connect, "SELECT * FROM `article` ORDER BY `id` DESC ");
-//$row = mysqli_num_rows($query);
-//if(!$row) echo 'not found article';
-//else {
-//    while ($art = mysqli_fetch_assoc($query)){?>
-<!--        <article>-->
-<!--            <p>author: --><?//=$art['author']?><!--</p>-->
-<!--            <p>title: --><?//=$art['title']?><!--</p>-->
-<!--            <p>text: --><?//=$art['text']?><!--</p>-->
-<!--            <p>date: --><?//=$art['date']?><!--</p>-->
-<!--        </article>-->
-<!--    --><?//}
-//}
 
 $db = new safeMysql();
 $row=mysqli_fetch_row($query);
