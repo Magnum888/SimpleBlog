@@ -423,3 +423,47 @@ footer {
   border: 1px solid #8a2be2;
   background-color: #8a2be2;
 }
+
+.logup legend,
+.login .sign-name{
+  color: #6D7781;
+  font-family: "Sofia", cursive;
+  font-weight: bold;
+  font-size: 3.6em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login .form-signin{
+  max-width: 420px;
+  padding: 30px 38px 66px;
+  margin: 0 auto;
+  border: 1px solid #cccccc;
+}
+.login .input-group{
+  height: 45px;
+  margin-bottom: 15px;
+  border-radius: 0px;
+  color: #8a2be2;
+}
+.login .form-control{
+  height: 45px;
+  color: #8a2be2;
+}
+.login .input-group:hover span i{
+  color: #8a2be2;
+}
+.login .btn-block{
+  border-radius: 0px;
+  margin-top: 25px;
+  background-color: #8a2be2;
+  border: none;
+}
+.login .btn-block:hover{
+  background-color: #6D7781;
+}
+.login .bol{
+  position: relative;
+  margin-top: -40px;
+  color: #8a2be2;
+}

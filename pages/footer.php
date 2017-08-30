@@ -34,13 +34,13 @@
     </div>
 </footer>
 
-<!-- Bootstrap core JavaScript -->
-<script src="jquery/jquery.min.js"></script>
-<script src="popper/popper.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-
-<!-- Custom scripts for this template -->
-<script src="../js/blog.js"></script>
+<!--<!-- Bootstrap core JavaScript -->-->
+<!--<script src="jquery/jquery.min.js"></script>-->
+<!--<script src="popper/popper.min.js"></script>-->
+<!--<script src="bootstrap/js/bootstrap.min.js"></script>-->
+<!---->
+<!--<!-- Custom scripts for this template -->-->
+<!--<script src="../js/blog.js"></script>-->
 
 </body>
 
