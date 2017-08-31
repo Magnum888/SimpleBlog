@@ -1,5 +1,25 @@
-<?php include 'header.php'?>
-<?php include ('../includes/connect.php');?>
+<?php include('../includes/db.php');?>
+<?php require "../includes/config.php";?>
+<?php include 'navigation.php'?>
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('/img/register-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1><?php echo $config['title'];?></h1>
+                    <span class="subheading">Register here</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+    <div class="block-arrow">
+        <div class="arrow arrow-1"></div>
+        <div class="arrow arrow-2"></div>
+    </div>
+    <!-- Page Content -->
 <div class='logup'>
     <form class="form-horizontal" action="register.php" method="post">
         <fieldset>

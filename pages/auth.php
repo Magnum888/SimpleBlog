@@ -1,5 +1,21 @@
-<?php include 'header.php'?>
-<?php include ('../includes/connect.php');?>
+<?php include('../includes/db.php');?>
+<?php require "../includes/config.php";?>
+<?php include 'navigation.php'?>
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('/img/header-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1><?php echo $config['title'];?></h1>
+                    <span class="subheading">A Blog by Kovel for SoftGroup</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Page Content -->
 <div class="login">
     <div class = "container">
         <div class="wrapper">
@@ -23,9 +39,7 @@
                 }
                 ?>
                 <div class="row text-center bol"><i class="fa fa-circle"></i></div>
-                <h3 class="form-signin-heading text-center">
-                    <img src="http://codigocomcafe.com.br/demo/form/image/logo.png" alt=""/>
-                </h3>
+                <p class="form-signin-heading text-center">Enter neme and password</p>
                 <hr class="spartan">
                 <div class="input-group">
                         <span class="input-group-addon" id="sizing-addon1">
