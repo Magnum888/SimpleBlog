@@ -54,16 +54,6 @@ while ($cat = mysqli_fetch_assoc($categories_q))
     </div>
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="owl-carousel owl-theme">
-                <div class="item"><h4>1</h4></div>
-                <div class="item"><h4>2</h4></div>
-                <div class="item"><h4>3</h4></div>
-                <div class="item"><h4>4</h4></div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
             <div class="row new-article">
                 <?php
                 $articles_q = mysqli_query($connect, "SELECT * FROM `article`" );
@@ -73,20 +63,21 @@ while ($cat = mysqli_fetch_assoc($categories_q))
                     $articles[] = $art;
                 }
                 ?>
-                <?php
-                foreach ($articles as $art)
-                {
-                    ?>
-                    <div class="col-md-4 article" style="background: url('/saves/images/<?php echo $art['image']; ?>');background-repeat: no-repeat;background-position: center; background-color: #c4d7ff; border: 1px solid #8a2be2;">
-                        <a href="/article.php?id=<?php echo $art['id']; ?>"><h3 class="title-article"><?php echo $art['title']; ?></h3></a>
-                        <div>
-                            <span class="author-article"><?php echo $art['author']; ?></span>
-                            <span class="date-article"><?php echo $art['date'] = date('Y-m-d'); ?></span>
-                        </div>
-                    </div>
-                    <?php
-                }
+                <div class="owl-carousel owl-theme">
+                    <?php foreach ($articles as $art)
+                    {
+                        ?>
+                            <div class="article item" style="background: url('/saves/images/<?php echo $art['image']; ?>');background-repeat: no-repeat;background-position: center; background-color: #c4d7ff; border: 1px solid #8a2be2; width: 250px; height: 250px;">
+                                <h4 class="title-article"><a href="/article.php?id=<?php echo $art['id']; ?>"><?php echo $art['title']; ?></a></h4>
+                                <div>
+                                    <span class="author-article"><?php echo $art['author']; ?></span>
+                                    <span class="date-article"><?php echo $art['date'] = date('Y-m-d'); ?></span>
+                                </div>
+                            </div>
+                        <?php
+                    }
                 ?>
+                </div>
             </div>
         </div>
     </div>
@@ -105,16 +96,16 @@ while ($cat = mysqli_fetch_assoc($categories_q))
                     </a>
                     <small>
                         <?php
-                        $art_cat = array();
+                        $art_cat = false;
                         foreach ($categories as $cat)
                         {
-                            if($cat['id'] == $art['category_id'])
+                            if($cat['id'] == $row['category_id'])
                             {
                                 $art_cat = $cat;
                                 break;
                             }
-
                         }
+
                         ?>
                         <span>Category:</span>
                         <a href="/category.php?id=<?php echo $art_cat['id']; ?>"><?php echo $art_cat['title']; ?></a>
