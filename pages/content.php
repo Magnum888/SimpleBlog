@@ -67,7 +67,7 @@ while ($cat = mysqli_fetch_assoc($categories_q))
                     <?php foreach ($articles as $art)
                     {
                         ?>
-                            <div class="article item" style="background: url('/saves/images/<?php echo $art['image']; ?>');background-repeat: no-repeat;background-position: center; background-color: #c4d7ff; border: 1px solid #8a2be2; width: 250px; height: 250px;">
+                            <div class="article item" style="background: url('/saves/images/<?php echo $art['image']; ?>');background-repeat: no-repeat;background-position: center; background-color: #c4d7ff; ">
                                 <h4 class="title-article"><a href="/article.php?id=<?php echo $art['id']; ?>"><?php echo $art['title']; ?></a></h4>
                                 <div>
                                     <span class="author-article"><?php echo $art['author']; ?></span>
