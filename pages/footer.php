@@ -37,3 +37,12 @@
 </body>
 
 </html>
+<!-- Bootstrap core JavaScript -->
+<script src="../includes/jquery/jquery.min.js"></script>
+<script src="../includes/popper/popper.min.js"></script>
+<script src="../includes/bootstrap/js/bootstrap.min.js"></script>
+<script src="../includes/owl.carousel.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="../js/blog.js"></script>
+<script src="../js/vb.js"></script>

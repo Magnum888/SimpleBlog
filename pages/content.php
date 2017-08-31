@@ -54,12 +54,27 @@ while ($cat = mysqli_fetch_assoc($categories_q))
     </div>
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="owl-carousel owl-theme">
+                <div class="item"><h4>1</h4></div>
+                <div class="item"><h4>2</h4></div>
+                <div class="item"><h4>3</h4></div>
+                <div class="item"><h4>4</h4></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
             <div class="row new-article">
                 <?php
-                $articles = mysqli_query($connect, "SELECT * FROM `article`" );
+                $articles_q = mysqli_query($connect, "SELECT * FROM `article`" );
+                $articles = array();
+                while ($art = mysqli_fetch_assoc($articles_q))
+                {
+                    $articles[] = $art;
+                }
                 ?>
                 <?php
-                while ($art = mysqli_fetch_assoc($articles))
+                foreach ($articles as $art)
                 {
                     ?>
                     <div class="col-md-4 article" style="background: url('/saves/images/<?php echo $art['image']; ?>');background-repeat: no-repeat;background-position: center; background-color: #c4d7ff; border: 1px solid #8a2be2;">
@@ -77,33 +92,36 @@ while ($cat = mysqli_fetch_assoc($categories_q))
     </div>
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            <?php
-            $art_cat = false;
-            foreach ($categories as $cat)
-            {
-                if($cat['id'] == $art['category_id'])
-                {
-                    $art_cat = $cat;
-                    break;
-                }
-            }
-            ?>
+
             <? foreach ($data as $row): ?>
                 <div class="post-preview">
                     <a href="/article.php?id=<?php echo $row['id']; ?>">
                         <h2 class="post-title">
                             <?=$row['title']?>
                         </h2>
-                        <small>
-                            <a href="/category.php?id=<?php echo $art_cat['id']; ?>">Category:<?php echo $art_cat['title']; ?></a>
-                        </small>
                         <h3 class="post-subtitle">
                             <?php echo mb_substr($row['text'], 0, 100, 'utf-8'); ?>
                         </h3>
                     </a>
+                    <small>
+                        <?php
+                        $art_cat = array();
+                        foreach ($categories as $cat)
+                        {
+                            if($cat['id'] == $art['category_id'])
+                            {
+                                $art_cat = $cat;
+                                break;
+                            }
+
+                        }
+                        ?>
+                        <span>Category:</span>
+                        <a href="/category.php?id=<?php echo $art_cat['id']; ?>"><?php echo $art_cat['title']; ?></a>
+                    </small>
                     <p class="post-meta">Posted by
                         <a href="#"><?=$row['author']?></a>
-                        <?=$row['date']?></p>
+                        <?=$row['date']= date('F Y')?></p>
                 </div>
                 <hr>
             <? endforeach ?>
