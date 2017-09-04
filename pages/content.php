@@ -1,6 +1,6 @@
 <?php
 include 'safemysql.class.php';
-include ('/includes/db.php');
+include ('includes/db.php');
 
 $query = mysqli_query($connect, "SELECT * FROM `article` ORDER BY `id` DESC ");
 
@@ -56,7 +56,7 @@ while ($cat = mysqli_fetch_assoc($categories_q))
         <div class="col-lg-8 col-md-10 mx-auto">
             <div class="row new-article">
                 <?php
-                $articles_q = mysqli_query($connect, "SELECT * FROM `article`" );
+                $articles_q = mysqli_query($connect, "SELECT * FROM `article` ORDER BY `id` DESC LIMIT 5" );
                 $articles = array();
                 while ($art = mysqli_fetch_assoc($articles_q))
                 {
@@ -68,10 +68,10 @@ while ($cat = mysqli_fetch_assoc($categories_q))
                     {
                         ?>
                             <div class="article item" style="background: url('/saves/images/<?php echo $art['image']; ?>');background-repeat: no-repeat;background-position: center; background-color: #c4d7ff; ">
-                                <h4 class="title-article"><a href="/article.php?id=<?php echo $art['id']; ?>"><?php echo $art['title']; ?></a></h4>
+                                <h4 class="title-article"><a href="../article.php?id=<?php echo $art['id']; ?>"><?php echo $art['title']; ?></a></h4>
                                 <div>
                                     <span class="author-article"><?php echo $art['author']; ?></span>
-                                    <span class="date-article"><?php echo $art['date'] = date('Y-m-d'); ?></span>
+                                    <span class="date-article"><?php echo $art['date']; ?></span>
                                 </div>
                             </div>
                         <?php
@@ -91,7 +91,7 @@ while ($cat = mysqli_fetch_assoc($categories_q))
                             <?=$row['title']?>
                         </h2>
                         <h3 class="post-subtitle">
-                            <?php echo mb_substr($row['text'], 0, 100, 'utf-8'); ?>
+                            <?php echo mb_substr(strip_tags($row['text']), 0, 100, 'utf-8') . '...'; ?>
                         </h3>
                     </a>
                     <small>
@@ -112,7 +112,8 @@ while ($cat = mysqli_fetch_assoc($categories_q))
                     </small>
                     <p class="post-meta">Posted by
                         <a href="#"><?=$row['author']?></a>
-                        <?=$row['date']= date('F Y')?></p>
+                        <?=$row['date']= date('F Y')?>
+                    </p>
                 </div>
                 <hr>
             <? endforeach ?>
