@@ -24,6 +24,8 @@ if(mysqli_num_rows($categories) <= 0)
     <?php
 }else
 {
+
+
     $cat = mysqli_fetch_assoc($categories);
     ?>
     <!-- Page Header -->
@@ -46,23 +48,29 @@ if(mysqli_num_rows($categories) <= 0)
             while ($art = mysqli_fetch_assoc($articles))
             {
         ?>
-    <article>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <div class="post-heading">
-                        <h1><?php echo $art['title']?></h1>
-                    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-preview">
+                    <a href="/article.php?id=<?php echo $art['id']; ?>">
+                        <h2 class="post-title">
+                            <?=$art['title']?>
+                        </h2>
+                        <h3 class="post-subtitle">
+                            <?php echo mb_substr(strip_tags($art['text']), 0, 100, 'utf-8') . '...'; ?>
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by
+                        <a href="#"><?=$art['author']?></a>
+                        <?=$art['date']= date('F Y')?>
+                    </p>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <?php echo $art['text']; ?>
-                </div>
+                <hr>
             </div>
         </div>
-    </article>
-            <?php } ?>
+    </div>
+         <?php } ?>
     <hr>
     <?php
 }
