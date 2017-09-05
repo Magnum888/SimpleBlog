@@ -51,7 +51,7 @@ if(mysqli_num_rows($categories) <= 0)
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="col-lg-10 col-md-10 mx-auto">
                 <div class="post-preview">
                     <a href="/article.php?id=<?php echo $art['id']; ?>">
                         <h2 class="post-title">
@@ -63,8 +63,10 @@ if(mysqli_num_rows($categories) <= 0)
                     </a>
                     <p class="post-meta">Posted by
                         <a href="#"><?=$art['author']?></a>
-                        <?=$art['date']= date('F Y')?>
+                        <?=strip_tags($art['date']) ?>
                     </p>
+                    <div style="background: url('/saves/images/<?php echo $art['image']; ?>');background-repeat: no-repeat;background-position: center; height: 250px;"></div>
+
                 </div>
                 <hr>
             </div>

@@ -3,8 +3,8 @@
 <?php include 'pages/navigation.php' ?>
 
 <?php
-    $article = mysqli_query($connect, "SELECT * FROM `article` WHERE `id` = " . (int) $_GET['id']);
-    if(mysqli_num_rows($article) <= 0)
+    $articles = mysqli_query($connect, "SELECT * FROM `article` WHERE `id` = " . (int) $_GET['id']);
+    if(mysqli_num_rows($articles) <= 0)
     {
 ?>
     <!-- Page Header -->
@@ -23,7 +23,7 @@
     <?php
     }else
         {
-            $art = mysqli_fetch_assoc($article);
+            $art = mysqli_fetch_assoc($articles);
             ?>
             <!-- Page Header -->
             <header class="masthead" style="background-image: url('img/one-article.jpg')">
@@ -46,10 +46,52 @@
             <article>
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-8 col-md-10 mx-auto">
-                            <?php echo $art['text']; ?>
+                        <div class="col-lg-12 col-md-12 mx-auto">
+                            <div class="post-preview">
+                                <p class="post-preview-txt">
+                                    <?=$art['preview']?>
+                                </p>
+                                <div class="img-article text-center">
+                                    <img class="img-fluid" src="/saves/images/<?php echo $art['image']; ?>" alt="">
+                                </div>
+                                <div class="post-subtitle">
+                                    <?php echo $art['text']; ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
+            </article>
+
+<!--            Post comments-->
+            <article>
+                <?php
+                $comments= mysqli_query($connect, "SELECT * FROM `comments` WHERE `articles_id` = " . (int) $_GET['id']);
+                ?>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 mx-auto">
+                            <p class="title-comments">Comments:</p>
+                            <hr>
+                        </div>
+                    </div>
+                    <?php while ($comment = mysqli_fetch_assoc($comments))
+                    {
+                        ?>
+                        <div class="comments-article col-lg-12 col-md-12 mx-auto">
+                            <div>
+                                <span>Comment by:</span>
+                                <span class="author-comment"><?php echo $comment['author']; ?></span>
+                                <span class="date-comment"><?php echo $comment['pubdate']; ?></span>
+                            </div>
+                            <div class="text-comment">
+                                <?php echo strip_tags($comment['text']); ?>
+                            </div>
+                        </div>
+                        <hr>
+                        <?php
+                    }
+                    ?>
                 </div>
             </article>
 

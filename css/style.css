@@ -288,8 +288,30 @@ header.masthead {
   font-size: 12px;
 }
 .author-article,
-.date-article{
-  font-family: "Sofia", cursive;
+.date-article,
+.title-comments{
+  font-family: "Sofia", Arial, cursive;
+}
+.comments-article{
+  padding: 0;
+}
+.title-comments{
+  font-family: "Sofia", Georgia, sans-serif;
+  font-weight: 500;
+  font-size: 1.3em;
+  margin: 30px 0 0 0;
+}
+.author-comment,
+.date-comment{
+  font-weight: 600;
+}
+.text-comment{
+  word-wrap: break-word;
+}
+@media screen and (min-width: 770px) {
+  .text-comment{
+    margin-left: 129px;
+  }
 }
 .post-preview > a {
   color: #333333;

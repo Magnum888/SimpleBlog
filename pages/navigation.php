@@ -7,6 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="myBlog">
     <meta name="author" content="Kovel">
+    <meta property="og:title" content="<?php echo $config['title'];?>">
+    <meta property="og:site_name" content="<?php echo $config['title'];?>">
+    <meta property="og:url" content="<?php echo $config['url'];?>">
+    <meta property="og:description" content="<?php echo $config['description'];?>">
+    <meta property="og:image" content="<?php echo $config['image'];?>">
 
     <title><?php echo $config['title'];?></title>
 

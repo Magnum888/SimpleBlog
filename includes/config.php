@@ -1,6 +1,9 @@
 <?php
 $config = array(
     'title' => 'Kovel Blog',
+    'description' => 'Kovel Blog',
+    'url' => '/',
+    'image' => '../img/header-bg.jpg',
     'facebook-url' => 'https://www.facebook.com/Magnum888',
     'twitter-url' => 'https://twitter.com/Magnum_KoV',
     'github-url' => 'https://github.com/Magnum888',

@@ -76,7 +76,7 @@ while ($cat = mysqli_fetch_assoc($categories_q))
                             </div>
                         <?php
                     }
-                ?>
+                    ?>
                 </div>
             </div>
         </div>
