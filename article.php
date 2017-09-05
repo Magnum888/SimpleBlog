@@ -66,7 +66,7 @@
 <!--            Post comments-->
             <article>
                 <?php
-                $comments= mysqli_query($connect, "SELECT * FROM `comments` WHERE `articles_id` = " . (int) $_GET['id']);
+                $comments= mysqli_query($connect, "SELECT * FROM `comments` WHERE `articles_id` = " . (int) $art['id'] . " ORDER BY `id` DESC ");
                 ?>
                 <div class="container">
                     <div class="row">
