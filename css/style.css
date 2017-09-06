@@ -328,29 +328,33 @@ header.masthead {
 .add-comment-link.btn.btn-2{
   background-image: linear-gradient(to right, #8a2be2 0%, #a6c1ee 51%, #8a2be2 100%);
 }
-#comment-add-form .fill:hover,
-#comment-add-form .fill:focus {
+.error-comment{
+  /*width: 150px;*/
+  color: red;
+}
+.panel-body .fill:hover,
+.panel-body .fill:focus {
   box-shadow: inset 0 0 0 2em var(--hover);
 }
-#comment-add-form .close:hover,
-#comment-add-form .close:focus {
+.panel-body .close:hover,
+.panel-body .close:focus {
   box-shadow: inset -3.5em 0 0 0 var(--hover), inset 3.5em 0 0 0 var(--hover);
 }
-#comment-add-form .fill,
-#comment-add-form .close {
+.panel-body .fill,
+.panel-body .close {
   --color: #a972cb;
   --hover: #8a2be2;
 }
-#comment-add-form button {
+.panel-body button {
   color: var(--color);
   -webkit-transition: 0.25s;
   transition: 0.25s;
 }
-#comment-add-form button:hover, button:focus {
+.panel-body button:hover, button:focus {
   border-color: var(--hover);
   color: #fff;
 }
-#comment-add-form button {
+.panel-body button {
   background: none;
   border: 4px solid;
   font: inherit;
@@ -361,12 +365,12 @@ header.masthead {
   font-weight: bold;
 }
 @media (min-width: 424px) and (max-width: 991px){
-  #comment-add-form button {
+  .panel-body button {
     padding: 0.1em 2em;
   }
 }
 @media screen and (max-width: 423px){
-  #comment-add-form button {
+  .panel-body button {
     padding: 0.1em 0.7em;
   }
 }

@@ -110,64 +110,84 @@
                                 <div class="panel-heading" >
                                     <h4 class="title-comments">Comment: </h4>
                                 </div>
-                                <form action="article.php?id=<?php echo $art['id']?>#form-comment" method="POST">
+                                <form class="form-comments" action="article.php?id=<?php echo htmlspecialchars($art['id'])?>#form-comment" method="POST">
                                     <?php
+                                    $nameErr = $nicknameErr = $emailErr = $messageErr = "";
+                                    function test_input($data) {
+                                        $data = trim($data);
+                                        $data = stripslashes($data);
+                                        $data = htmlspecialchars($data);
+                                        return $data;
+                                    }
+
                                     if (isset($_POST['do_post']))
                                     {
                                         $errors = array();
-                                        if ($_POST['name'] == '')
-                                        {
-                                            $errors[] = "enter name";
+                                        if (empty($_POST["name"])) {
+                                            $errors[] = $nameErr = "Please enter name!";
+                                        } else {
+                                            $name = test_input($_POST["name"]);
                                         }
-                                        if ($_POST['nickname'] == '')
-                                        {
-                                            $errors[] = "enter nickname";
+
+                                        if (empty($_POST["nickname"])) {
+                                            $errors[] = $nicknameErr = "Please enter nickname!";
+                                        } else {
+                                            $nickname = test_input($_POST["nickname"]);
                                         }
-                                        if ($_POST['email'] == '')
-                                        {
-                                            $errors[] = "enter email";
+
+                                        if (empty($_POST["email"])) {
+                                            $errors[] = $emailErr = "Please enter email!";
+                                        } else {
+                                            $email = test_input($_POST["email"]);
                                         }
-                                        if ($_POST['message'] == '')
-                                        {
-                                            $errors[] = "enter comment";
+
+                                        if (empty($_POST["message"])) {
+                                            $errors[] = $messageErr = "Please enter comment!";
+                                        } else {
+                                            $message = test_input($_POST["message"]);
                                         }
                                         if (empty($errors))
                                         {
-                                            //add comment
-                                        }else
-                                            {
-                                                echo $errors[0];
-                                            }
+                                            mysqli_query($connect, "INSERT INTO `comments` (`author`, `nickname`, `email`, `text`, `pubdate`, `articles_id`) VALUES ('".mysqli_real_escape_string($connect,$_POST['name'])."', '".mysqli_real_escape_string($connect,$_POST['nickname'])."', '".mysqli_real_escape_string($connect,$_POST['email'])."', '".mysqli_real_escape_string($connect,$_POST['message'])."', NOW(), '".$art['id']."')" );
+                                            echo '<div style="color:green; font-weight: 700; margin-bottom: 10px;">Comment add successful!!!</div>';
+                                            unset($_POST['name'], $_POST['nickname'], $_POST['email'], $_POST['message']);
+                                            $url = 'article.php?id=' . $art['id'];
+                                            header('Location: ' . $url);
+                                        }
                                     }
                                     ?>
                                     <div class="panel-body">
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                                <input type="text" name="name" placeholder="Name" class="form-control" value="<?php echo $_POST['name']?>" autofocus="autofocus">
+                                                <input type="text" name="name" placeholder="Name" class="form-control form-input-name reset" value="<?php echo htmlspecialchars($_POST['name'])?>" autofocus="autofocus">
                                             </div>
+                                            <div class="error-comment"><?php echo $nameErr;?></div>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-user-plus" aria-hidden="true"></i></span>
-                                                <input type="text" name="nickname" placeholder="Nickname" class="form-control" value="<?php echo $_POST['nickname']?>" autofocus="autofocus">
+                                                <input type="text" name="nickname" placeholder="Nickname" class="form-control form-input-nickname reset" value="<?php echo htmlspecialchars($_POST['nickname'])?>" autofocus="autofocus">
                                             </div>
+                                            <div class="error-comment"><?php echo $nicknameErr;?></div>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                                <input type="email" name="email" placeholder="Email" class="form-control" value="<?php echo $_POST['email']?>">
+                                                <input type="email" name="email" placeholder="Email" class="form-control form-input-email reset" value="<?php echo htmlspecialchars($_POST['email'])?>">
                                             </div>
+                                            <div class="error-comment"><?php echo $emailErr;?></div>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-comment"></i></span>
-                                                <textarea name="message" rows="6" class="form-control" type="text" placeholder="Text comment"><?php echo $_POST['message']?></textarea>
+                                                <textarea name="message" rows="6" class="form-control form-input-message reset" type="text" placeholder="Text comment"><?php echo htmlspecialchars($_POST['message'])?></textarea>
                                             </div>
+                                            <div class="error-comment"><?php echo htmlspecialchars($messageErr);?></div>
                                         </div>
                                         <div class="col-lg-12 col-md-12 mx-auto">
-                                            <button type="submit" name="do_post" class="fill pull-right">Send <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                                            <button type="reset" value="Reset" name="reset" class="fill">Reset <i class="fa fa-refresh" aria-hidden="true"></i></button>
+                                            <button type="submit" name="do_post" class="btn fill pull-right">Send <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                            <button type="reset" value="Reset" name="reset" class="btn fill sub">Reset <i class="fa fa-refresh" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
                                 </form>
@@ -183,3 +203,38 @@
     ?>
 
 <?php include 'pages/footer.php'?>
+<script>
+//    jQuery('.sub').submit(function (e) {
+//        e.preventDefault();
+//        var input_name = jQuery('.form-input-name').val();
+//        var input_nickname = jQuery('.form-input-nickname').val();
+//        var input_email = jQuery('.form-input-email').val();
+//        var input_message = jQuery('.form-input-message').val();
+//        var formData = {
+//            'name': input_name,
+//            'nickname': input_nickname,
+//            'email': input_email,
+//            'message': input_message
+//        };
+//        jQuery.ajax({
+//            type: 'POST',
+//            url: $(this).prop('href'),
+//            data: formData,
+//            dataType: 'json',
+//            encode: true,
+//            success: function (res) {
+//                $('.reset').val('');
+//            }
+//        })
+//    })
+
+$(document).ready(function(){
+    $('.sub').click(function(){
+        var url = $(this).prop('href');
+        console.log(url);
+        $.ajax({url: url, success: function(result){
+            $('.reset').val('');
+        }});
+    });
+});
+</script>
