@@ -56,7 +56,7 @@ while ($cat = mysqli_fetch_assoc($categories_q))
         <div class="col-lg-8 col-md-10 mx-auto">
             <div class="row new-article">
                 <?php
-                $articles_q = mysqli_query($connect, "SELECT * FROM `article` ORDER BY `id` DESC LIMIT 5" );
+                $articles_q = mysqli_query($connect, "SELECT * FROM `article` ORDER BY `views` DESC LIMIT 5" );
                 $articles = array();
                 while ($art = mysqli_fetch_assoc($articles_q))
                 {
@@ -112,7 +112,7 @@ while ($cat = mysqli_fetch_assoc($categories_q))
                     </small>
                     <p class="post-meta">Posted by
                         <a href="#"><?=$row['author']?></a>
-                        <?=$row['date']= date('F Y')?>
+                        <?=$row['date']?>
                     </p>
                 </div>
                 <hr>
