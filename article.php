@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php require "includes/config.php";?>
 <?php include 'includes/db.php';?>
 <?php include 'pages/navigation.php' ?>
@@ -70,6 +71,82 @@
                 <?php
                 $comments= mysqli_query($connect, "SELECT * FROM `comments` WHERE `articles_id` = " . (int) $art['id'] . " ORDER BY `id` DESC ");
                 ?>
+                <?php
+
+                $nameErr = $nicknameErr = $emailErr = $messageErr = $comment_success = "";
+                $form_key = 'comment_to_article';
+                $csrf_token = '';
+//                $user_id = 2;
+                $errors = array();
+                function test_input($data) {
+                    $data = trim($data);
+                    $data = stripslashes($data);
+                    $data = htmlspecialchars($data);
+                    return $data;
+                }
+                if(version_compare(PHP_VERSION,'7.0.0', '>='))
+                {
+                    $csrf_token =  bin2hex(random_bytes(32));
+                }else
+                {
+                    if (function_exists('mcrypt_create_iv')) {
+                        $csrf_token = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+                    } else {
+                        $csrf_token = bin2hex(openssl_random_pseudo_bytes(32));
+                    }
+                }
+                $_SESSION['csrf_' . $form_key] = $csrf_token;
+                print_r($_POST['csrf'] . '<br/>');
+
+                print_r($_SESSION['csrf_' . $form_key]);
+                exit();
+//                if (!empty($_POST['csrf'])) {
+                    if (hash_equals($_SESSION['csrf' . $form_key], $_POST['csrf'])) {
+                        // Proceed to process the form data
+
+
+                    } else {
+                        // Log this as a warning and keep an eye on these attempts
+                        exit("Warning!!! CSRF!!!");
+                    }
+//                }
+
+
+                if (isset($_POST['do_post']))
+                {
+                    if (empty($_POST["name"])) {
+                        $errors[] = $nameErr = "Please enter name!";
+                    } else {
+                        $name = test_input($_POST["name"]);
+                    }
+
+                    if (empty($_POST["nickname"])) {
+                        $errors[] = $nicknameErr = "Please enter nickname!";
+                    } else {
+                        $nickname = test_input($_POST["nickname"]);
+                    }
+
+                    if (empty($_POST["email"])) {
+                        $errors[] = $emailErr = "Please enter email!";
+                    } else {
+                        $email = test_input($_POST["email"]);
+                    }
+
+                    if (empty($_POST["message"])) {
+                        $errors[] = $messageErr = "Please enter comment!";
+                    } else {
+                        $message = test_input($_POST["message"]);
+                    }
+                    if (empty($errors))
+                    {
+                        mysqli_query($connect, "INSERT INTO `comments` (`author`, `nickname`, `email`, `text`, `pubdate`, `articles_id`) VALUES ('".mysqli_real_escape_string($connect,$_POST['name'])."', '".mysqli_real_escape_string($connect,$_POST['nickname'])."', '".mysqli_real_escape_string($connect,$_POST['email'])."', '".mysqli_real_escape_string($connect,$_POST['message'])."', NOW(), '".$art['id']."')" );
+                        $comment_success = 'Comment add successful!!!';
+                        unset($_POST['name'], $_POST['nickname'], $_POST['email'], $_POST['message']);
+//                                            $url = 'article.php?id=' . $art['id'];
+//                                            header('Location:  /');
+                    }
+                }
+                ?>
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 mx-auto">
@@ -110,52 +187,8 @@
                                 <div class="panel-heading" >
                                     <h4 class="title-comments">Comment: </h4>
                                 </div>
+                                <div style="color:green; font-weight: 700; margin-bottom: 10px;"><?php echo $comment_success;?></div>
                                 <form class="form-comments" action="article.php?id=<?php echo htmlspecialchars($art['id'])?>#form-comment" method="POST">
-                                    <?php
-                                    $nameErr = $nicknameErr = $emailErr = $messageErr = "";
-                                    function test_input($data) {
-                                        $data = trim($data);
-                                        $data = stripslashes($data);
-                                        $data = htmlspecialchars($data);
-                                        return $data;
-                                    }
-
-                                    if (isset($_POST['do_post']))
-                                    {
-                                        $errors = array();
-                                        if (empty($_POST["name"])) {
-                                            $errors[] = $nameErr = "Please enter name!";
-                                        } else {
-                                            $name = test_input($_POST["name"]);
-                                        }
-
-                                        if (empty($_POST["nickname"])) {
-                                            $errors[] = $nicknameErr = "Please enter nickname!";
-                                        } else {
-                                            $nickname = test_input($_POST["nickname"]);
-                                        }
-
-                                        if (empty($_POST["email"])) {
-                                            $errors[] = $emailErr = "Please enter email!";
-                                        } else {
-                                            $email = test_input($_POST["email"]);
-                                        }
-
-                                        if (empty($_POST["message"])) {
-                                            $errors[] = $messageErr = "Please enter comment!";
-                                        } else {
-                                            $message = test_input($_POST["message"]);
-                                        }
-                                        if (empty($errors))
-                                        {
-                                            mysqli_query($connect, "INSERT INTO `comments` (`author`, `nickname`, `email`, `text`, `pubdate`, `articles_id`) VALUES ('".mysqli_real_escape_string($connect,$_POST['name'])."', '".mysqli_real_escape_string($connect,$_POST['nickname'])."', '".mysqli_real_escape_string($connect,$_POST['email'])."', '".mysqli_real_escape_string($connect,$_POST['message'])."', NOW(), '".$art['id']."')" );
-                                            echo '<div style="color:green; font-weight: 700; margin-bottom: 10px;">Comment add successful!!!</div>';
-                                            unset($_POST['name'], $_POST['nickname'], $_POST['email'], $_POST['message']);
-                                            $url = 'article.php?id=' . $art['id'];
-                                            header('Location: ' . $url);
-                                        }
-                                    }
-                                    ?>
                                     <div class="panel-body">
                                         <div class="form-group">
                                             <div class="input-group">
@@ -185,6 +218,7 @@
                                             </div>
                                             <div class="error-comment"><?php echo htmlspecialchars($messageErr);?></div>
                                         </div>
+                                        <input type="hidden" name="csrf" value="<?php echo $csrf_token; ?>" />
                                         <div class="col-lg-12 col-md-12 mx-auto">
                                             <button type="submit" name="do_post" class="btn fill pull-right">Send <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                                             <button type="reset" value="Reset" name="reset" class="btn fill sub">Reset <i class="fa fa-refresh" aria-hidden="true"></i></button>
