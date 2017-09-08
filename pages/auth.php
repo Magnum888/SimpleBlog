@@ -1,6 +1,6 @@
 <?php include('../includes/db.php');?>
 <?php require "../includes/config.php";?>
-<?php include 'navigation.php'?>
+<?php include '../navigation.php' ?>
 
 <!-- Page Header -->
 <header class="masthead" style="background-image: url('/img/header-bg.jpg')">

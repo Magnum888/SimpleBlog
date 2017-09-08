@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <?php require "includes/config.php";?>
 <?php include 'includes/db.php';?>
-<?php include 'pages/navigation.php' ?>
+<?php include 'navigation.php' ?>
 
 <?php
 $articles = mysqli_query($connect, "SELECT * FROM `article` WHERE `id` = " . (int) $_GET['id']);

@@ -1,3 +1,5 @@
+<?php include('includes/db.php');?>
+<?php require "includes/config.php";?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,21 +18,21 @@
     <title><?php echo $config['title'];?></title>
 
     <!-- Bootstrap -->
-    <link href="../includes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/includes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Carousel -->
-    <link href="../css/owl.theme.default.min.css" rel="stylesheet" >
-    <link href="../css/owl.carousel.min.css" rel="stylesheet" >
+    <link href="/css/owl.theme.default.min.css" rel="stylesheet" >
+    <link href="/css/owl.carousel.min.css" rel="stylesheet" >
 
     <!-- Custom fonts -->
-    <link href="../includes/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/includes/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
 
     <!-- Custom styles -->
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
 </head>
 
