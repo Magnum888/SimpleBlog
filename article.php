@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <?php require "includes/config.php";?>
 <?php include 'includes/db.php';?>
 <?php include 'navigation.php' ?>

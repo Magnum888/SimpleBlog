@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php include('includes/db.php');?>
 <?php require "includes/config.php";?>
 <!DOCTYPE html>

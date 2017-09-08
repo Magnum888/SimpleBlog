@@ -43,7 +43,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="login">Username</label>
                 <div class="col-md-4 mx-auto">
-                    <input class="form-control input-md" name="login" type="text" placeholder="Login">
+                    <input class="form-control input-md" name="login" type="text" placeholder="Login" size="15" maxlength="15">
                 </div>
             </div>
 
@@ -51,8 +51,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="password">Password</label>
                 <div class="col-md-4 mx-auto">
-                    <input id="password" name="password" type="password" placeholder="Password" class="form-control input-md">
-                    <!--                            required=""-->
+                    <input id="password" name="password" type="password" placeholder="Password" class="form-control input-md" size="15" maxlength="15">
                 </div>
             </div>
 
@@ -60,8 +59,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="password2">Confirm password</label>
                 <div class="col-md-4 mx-auto">
-                    <input id="password2" name="password2" type="password" placeholder="Re-type password" class="form-control input-md">
-
+                    <input id="password2" name="password2" type="password" placeholder="Re-type password" class="form-control input-md" size="15" maxlength="15">
                 </div>
             </div>
 

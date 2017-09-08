@@ -20,24 +20,24 @@
     <div class = "container">
         <div class="wrapper">
             <div class="sign-name">Sign in</div>
-            <form action="auth.php" method="post" name="Login_Form" class="form-signin">
-                <?php
-                if($_POST['Submit']){
-                    $_POST['password'] = md5($_POST['password']);
-                    $row = mysqli_query($connect, "SELECT * FROM `users` WHERE `login` = '$_POST[login]' AND `password` = '$_POST[password]'");
-                    if(mysqli_num_rows($row)) {
-                        $ass = mysqli_fetch_assoc($row);
-                        foreach ($ass as $key => $value){
-                            setcookie($key, $value, time()+7200);
-                        }
-                        echo 'id ='.$_COOKIE['id'];
-                        echo 'login ='.$_COOKIE['login'];
-                        echo 'password ='.$_COOKIE['password'];
-                        echo 'admin ='.$_COOKIE['id'];
-                    }
-                    else echo '<b>Login or password entered incorrectly</b>';
-                }
-                ?>
+            <form action="cofirmauth.php" method="post" name="Login_Form" class="form-signin">
+<!--                --><?php
+//                if($_POST['Submit']){
+//                    $_POST['password'] = md5($_POST['password']);
+//                    $row = mysqli_query($connect, "SELECT * FROM `users` WHERE `login` = '$_POST[login]' AND `password` = '$_POST[password]'");
+//                    if(mysqli_num_rows($row)) {
+//                        $ass = mysqli_fetch_assoc($row);
+//                        foreach ($ass as $key => $value){
+//                            setcookie($key, $value, time()+7200);
+//                        }
+//                        echo 'id ='.$_COOKIE['id'];
+//                        echo 'login ='.$_COOKIE['login'];
+//                        echo 'password ='.$_COOKIE['password'];
+//                        echo 'admin ='.$_COOKIE['id'];
+//                    }
+//                    else echo '<b>Login or password entered incorrectly</b>';
+//                }
+//                ?>
                 <div class="row text-center bol"><i class="fa fa-circle"></i></div>
                 <p class="form-signin-heading text-center">Enter neme and password</p>
                 <hr class="spartan">
