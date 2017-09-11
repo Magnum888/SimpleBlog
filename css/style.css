@@ -328,8 +328,8 @@ header.masthead {
 .add-comment-link.btn.btn-2{
   background-image: linear-gradient(to right, #8a2be2 0%, #a6c1ee 51%, #8a2be2 100%);
 }
-.error-comment{
-  /*width: 150px;*/
+.error-comment,
+.error-login{
   color: red;
 }
 .panel-body .fill:hover,

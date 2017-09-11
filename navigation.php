@@ -58,12 +58,22 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/post.php">Posts</a>
                 </li>
+                <?php if (!isset($_SESSION['name']))
+                {?>
                 <li class="nav-item">
                     <a class="nav-link" href="/pages/register.php">Registration</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/pages/auth.php">Log in</a>
                 </li>
+                <?php }else{?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pages/profile.php">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pages/exit.php">Exit</a>
+                </li>
+                <?php }?>
             </ul>
         </div>
     </div>
