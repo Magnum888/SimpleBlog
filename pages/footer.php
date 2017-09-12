@@ -42,7 +42,9 @@
 <script src="../includes/popper/popper.min.js"></script>
 <script src="../includes/bootstrap/js/bootstrap.min.js"></script>
 <script src="../includes/owl.carousel.min.js"></script>
+<script src="../includes/ckeditor/ckeditor.js"></script>
 
 <!-- Custom scripts for this template -->
 <script src="../js/blog.js"></script>
 <script src="../js/vb.js"></script>
+<script src="../js/ckedior.js"></script>

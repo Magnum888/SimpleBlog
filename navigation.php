@@ -89,7 +89,7 @@
                     {
                         ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="/pages/blogadmin.php">Admin</a>
+                            <a class="nav-link" href="/pages/admin.php">Admin</a>
                         </li>
                         <?php
                     }
