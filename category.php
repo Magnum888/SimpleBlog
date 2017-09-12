@@ -1,6 +1,6 @@
 <?php include'includes/db.php';?>
 <?php require "includes/config.php";?>
-<?php include 'pages/navigation.php' ?>
+<?php include 'navigation.php' ?>
 
 
 <?php

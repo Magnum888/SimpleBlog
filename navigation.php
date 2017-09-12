@@ -56,7 +56,7 @@
                     <a class="nav-link" href="/pages/about.php">About me</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/post.php">Posts</a>
+                    <a class="nav-link" href="/#posts">Posts category</a>
                 </li>
                 <?php if (!isset($_SESSION['name']))
                 {?>
@@ -74,6 +74,26 @@
                     <a class="nav-link" href="/pages/exit.php">Exit</a>
                 </li>
                 <?php }?>
+                <?php
+
+//                    $admin_page = mysqli_query($connect, "SELECT `admin` FROM `users` WHERE `admin` = `1`");
+//                    while($row = mysqli_fetch_assoc($admin_page))
+//                    {
+//                        $admin = $row['admin'];
+//                    }
+//                    $admin = mysqli_fetch_array($admin_page);
+//                    $_SESSION['admin'] = $admin['admin'];
+
+//                    print_r($admin_page);
+                    if($_SESSION['name'] == 'admin')
+                    {
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pages/blogadmin.php">Admin</a>
+                        </li>
+                        <?php
+                    }
+                ?>
             </ul>
         </div>
     </div>

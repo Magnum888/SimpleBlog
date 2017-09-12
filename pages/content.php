@@ -33,7 +33,7 @@ while ($cat = mysqli_fetch_assoc($categories_q))
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="row main-categories">
+            <div class="row main-categories" id="posts">
                 <?php
                     foreach ($categories as $cat)
                     {

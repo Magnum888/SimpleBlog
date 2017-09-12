@@ -86,20 +86,20 @@ body {
 
 #mainNav {
   position: absolute;
-  border-bottom: 1px solid #eeeeee;
-  background-color: white;
+  border-bottom: 1px solid #7d1a7e;
+  background-color: #8a2be2;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
   #mainNav .navbar-brand {
     font-weight: 800;
-    color: #777777;
+    color: #fcfcfc;
   }
   #mainNav .navbar-toggler {
     font-size: 12px;
     font-weight: 800;
     padding: 13px;
     text-transform: uppercase;
-    color: #777777;
+    color: #fcfcfc;
   }
   #mainNav .navbar-nav > li.nav-item > a {
     font-size: 12px;
@@ -117,14 +117,14 @@ body {
         color: white;
       }
         #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
-          color: rgba(255, 255, 255, 0.8);
+          color: rgba(138, 43, 226, 0.8);
         }
       #mainNav .navbar-nav > li.nav-item > a {
         padding: 15px 20px;
         color: white;
       }
         #mainNav .navbar-nav > li.nav-item > a:focus, #mainNav .navbar-nav > li.nav-item > a:hover {
-          color: rgba(255, 255, 255, 0.8);
+          color: rgba(138, 43, 226, 0.8);
         }
   }
   @media only screen and (min-width: 1170px) {
