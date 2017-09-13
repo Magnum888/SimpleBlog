@@ -170,7 +170,7 @@ if(mysqli_num_rows($articles) <= 0)
                         <span class="date-comment"><?php echo $comment['pubdate']; ?></span>
                     </div>
                     <div class="text-comment">
-                        <?php echo strip_tags($comment['text']); ?>
+                        <?php echo $comment['text']; ?>
                     </div>
                 </div>
                 <hr>
