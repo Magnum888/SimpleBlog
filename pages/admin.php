@@ -1,8 +1,7 @@
 <?php include '../includes/db.php';?>
 <?php require "../includes/config.php";?>
-<?php include '../navigation.php'?>
-<?php include 'admin_add_blog.php'?>
-
+<?php include '../navigation.php';?>
+<?php include '../models/adminAddBlogModel.php';?>
 
     <!-- Page Header -->
     <header class="masthead" style="background-image: url('/img/register-bg.jpg')">
@@ -96,8 +95,5 @@
         </form>
     </div>
 <?php endif ?>
-    <?php if ($_SESSION['name'] != 'admin'){
-        echo "You do not have permissions to view this page";
-    }?>
 <?php include 'footer.php'?>
 

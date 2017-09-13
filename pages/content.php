@@ -1,49 +1,17 @@
-<?php
-include 'safemysql.class.php';
-include ('includes/db.php');
+<?php include '/includes/safemysql.class.php';?>
+<?php include ('/models/contentModel.php');?>
 
-$query = mysqli_query($connect, "SELECT * FROM `article` ORDER BY `id` DESC ");
-
-$db = new safeMysql();
-$row=mysqli_fetch_row($query);
-$total_rows=$row[0];
-$per_page = 10;
-$cur_page = 1;
-if (isset($_GET['page']) && $_GET['page'] > 0)
-{
-    $cur_page = $_GET['page'];
-}
-$start = ($cur_page - 1) * $per_page;
-
-$sql  = "SELECT SQL_CALC_FOUND_ROWS * FROM `article` LIMIT ?i, ?i";
-$data = $db->getAll($sql, $start, $per_page);
-$row = $db->getOne("SELECT FOUND_ROWS()");
-$num_pages = ceil($row / $per_page);
-$page = 0;
-?>
-<?php
-$categories_q = mysqli_query($connect, "SELECT * FROM `articles_categories`" );
-$categories = array();
-while ($cat = mysqli_fetch_assoc($categories_q))
-{
-    $categories[] = $cat;
-}
-?>
 <!-- Main Content -->
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
             <div class="row main-categories" id="posts">
-                <?php
-                    foreach ($categories as $cat)
-                    {
-                        ?>
+                <?php foreach ($categories as $cat)
+                    {?>
                         <div class="col-md-4">
                             <a href="/category.php?id=<?php echo $cat['id']; ?>"><h3><?php echo $cat['title']; ?></h3></a>
                         </div>
-                        <?php
-                    }
-                ?>
+                    <?php }?>
             </div>
         </div>
     </div>
@@ -55,14 +23,6 @@ while ($cat = mysqli_fetch_assoc($categories_q))
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
             <div class="row new-article">
-                <?php
-                $articles_q = mysqli_query($connect, "SELECT * FROM `article` ORDER BY `views` DESC LIMIT 5" );
-                $articles = array();
-                while ($art = mysqli_fetch_assoc($articles_q))
-                {
-                    $articles[] = $art;
-                }
-                ?>
                 <div class="owl-carousel owl-theme">
                     <?php foreach ($articles as $art)
                     {
@@ -83,7 +43,6 @@ while ($cat = mysqli_fetch_assoc($categories_q))
     </div>
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-
             <? foreach ($data as $row): ?>
                 <div class="post-preview">
                     <a href="/article.php?id=<?php echo $row['id']; ?>">
@@ -97,15 +56,14 @@ while ($cat = mysqli_fetch_assoc($categories_q))
                     <small>
                         <?php
                         $art_cat = false;
-                        foreach ($categories as $cat)
+                        foreach ($categories as $category)
                         {
-                            if($cat['id'] == $row['category_id'])
+                            if($category['id'] == $row['category_id'])
                             {
-                                $art_cat = $cat;
+                                $art_cat = $category;
                                 break;
                             }
                         }
-
                         ?>
                         <span>Category:</span>
                         <a href="/category.php?id=<?php echo $art_cat['id']; ?>"><?php echo $art_cat['title']; ?></a>
@@ -117,6 +75,7 @@ while ($cat = mysqli_fetch_assoc($categories_q))
                 </div>
                 <hr>
             <? endforeach ?>
+
             <!-- Pager -->
             <div class="clearfix">
                 Pages:

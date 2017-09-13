@@ -15,9 +15,9 @@
             </div>
         </div>
     </header>
-<?php
-if (isset($_SESSION['name']))
-{?>
+
+<?php if (isset($_SESSION['name'])) {?>
+
     <!-- Main Content -->
     <div class="container">
         <div class="row">
@@ -25,8 +25,12 @@ if (isset($_SESSION['name']))
                 <h4>Hello <?php echo $login_user; ?></h4>
                 <p>Go to the<a href="/"> Main page </a>
                 <p>Go to the<a href="exit.php"> Exit </a>
+                <?php if($_SESSION['name'] == 'admin') {?>
+                    <p>Go to the<a class="nav-link" href="/pages/admin.php">Admin page</a></p>
+                <?php }?>
             </div>
         </div>
     </div>
+
 <?php } ?>
 <?php include 'footer.php'?>

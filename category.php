@@ -1,13 +1,10 @@
 <?php include'includes/db.php';?>
 <?php require "includes/config.php";?>
 <?php include 'navigation.php' ?>
+<?php include 'models/categoryModel.php'?>
 
+<?php if(mysqli_num_rows($categories) <= 0) {?>
 
-<?php
-$categories = mysqli_query($connect, "SELECT * FROM `articles_categories` WHERE `id` = " . (int) $_GET['id']);
-if(mysqli_num_rows($categories) <= 0)
-{
-    ?>
     <!-- Page Header -->
     <header class="masthead" style="background-image: url('img/one-article.jpg')">
         <div class="container">
@@ -21,13 +18,9 @@ if(mysqli_num_rows($categories) <= 0)
             </div>
         </div>
     </header>
-    <?php
-}else
-{
 
+<?php }else {?>
 
-    $cat = mysqli_fetch_assoc($categories);
-    ?>
     <!-- Page Header -->
     <header class="masthead" style="background-image: url('img/one-article.jpg')">
         <div class="container">
@@ -40,14 +33,9 @@ if(mysqli_num_rows($categories) <= 0)
             </div>
         </div>
     </header>
-    <?php
-    $articles = mysqli_query($connect, "SELECT * FROM `article` WHERE `category_id` = " . (int) $_GET['id']);
-    ?>
-<!--     Post Content -->
-        <?php
-            while ($art = mysqli_fetch_assoc($articles))
-            {
-        ?>
+
+    <!-- Post Content -->
+<?php while ($art = mysqli_fetch_assoc($articles)) {?>
 
     <div class="container">
         <div class="row">
@@ -65,16 +53,14 @@ if(mysqli_num_rows($categories) <= 0)
                         <a href="#"><?=$art['author']?></a>
                         <?=strip_tags($art['date']) ?>
                     </p>
-                    <div style="background: url('<?php echo $art['image']; ?>');background-repeat: no-repeat;background-position: center; height: 250px;"></div>
-
+                    <div style="background: url('<?php echo $art['image']; ?>');background-repeat: no-repeat;background-position: center; height: 250px;">
+                    </div>
                 </div>
                 <hr>
             </div>
         </div>
     </div>
-         <?php } ?>
+<?php } ?>
     <hr>
-    <?php
-}
-?>
+<?php } ?>
 <?php include 'pages/footer.php'?>

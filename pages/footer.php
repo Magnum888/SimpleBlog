@@ -48,3 +48,4 @@
 <script src="../js/blog.js"></script>
 <script src="../js/vb.js"></script>
 <script src="../js/ckedior.js"></script>
+<script src="../js/article.js"></script>

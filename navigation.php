@@ -74,26 +74,13 @@
                     <a class="nav-link" href="/pages/exit.php">Exit</a>
                 </li>
                 <?php }?>
-                <?php
 
-//                    $admin_page = mysqli_query($connect, "SELECT `admin` FROM `users` WHERE `admin` = `1`");
-//                    while($row = mysqli_fetch_assoc($admin_page))
-//                    {
-//                        $admin = $row['admin'];
-//                    }
-//                    $admin = mysqli_fetch_array($admin_page);
-//                    $_SESSION['admin'] = $admin['admin'];
-
-//                    print_r($admin_page);
-                    if($_SESSION['name'] == 'admin')
-                    {
-                        ?>
+                <?php if($_SESSION['name'] == 'admin')
+                    {?>
                         <li class="nav-item">
                             <a class="nav-link" href="/pages/admin.php">Admin</a>
                         </li>
-                        <?php
-                    }
-                ?>
+                <?php }?>
             </ul>
         </div>
     </div>

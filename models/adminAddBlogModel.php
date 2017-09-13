@@ -1,15 +1,19 @@
 <?php
+if ($_SESSION['name'] != 'admin'){ echo "You do not have permissions to view this page";}
+
 $errors = array();
 $err_author = '';
 $err_title = '';
 $err_category_id = '';
 $successful_txt = '';
+
 function test_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
     return $data;
 }
+
 if (isset($_POST['do_save'])){
 
     if(empty($_FILES['file']['size']))  die('You did not select a file');
@@ -46,8 +50,7 @@ if (isset($_POST['do_save'])){
 //        mysqli_query($connect, "INSERT INTO `article` (`author`, `title`, `preview`,`image`, `text`, `category_id`, `date`) VALUES ('$author', '$title', '$preview', '$image', '$text', '$category_id', NOW())");
         unset($_POST['preview'], $_POST['text']);
         mysqli_query($connect, "INSERT INTO `article` (`author`, `title`, `preview`,`image`, `text`, `category_id`, `date`) VALUES ('".mysqli_real_escape_string($connect,$author)."', '".mysqli_real_escape_string($connect, $title)."', '".mysqli_real_escape_string($connect, $preview)."', '".mysqli_real_escape_string($connect, $image)."', '".mysqli_real_escape_string($connect,$text)."', '".mysqli_real_escape_string($connect,$category_id)."', NOW())");
-//        mysqli_query($connect, "INSERT INTO `users` (`login`, `email`, `password`) VALUES ('$login', '$email', '$password')");
-        $successful_txt = 'You are add blog successful. If you want change blog press <a href="admin_all_blogs.php">here</a>';
+        $successful_txt = 'You are add blog successful. If you want change blog press <a href="../pages/admin_all_blogs.php">here</a>';
     };
 }
 ?>

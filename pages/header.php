@@ -1,7 +1,3 @@
-<?php
-//require "/includes/config.php";
-?>
-
 <!-- Page Header -->
 <header class="masthead" style="background-image: url('/img/header-bg.jpg')">
     <div class="container">

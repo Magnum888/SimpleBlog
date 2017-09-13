@@ -1,8 +1,7 @@
 <?php include '../includes/db.php'; ?>
 <?php require "../includes/config.php";?>
 <?php include '../navigation.php' ?>
-<?php include 'confirm_auth.php' ?>
-
+<?php include '../models/confirmAuthModel.php' ?>
 
 <!-- Page Header -->
 <header class="masthead" style="background-image: url('/img/header-bg.jpg')">
@@ -17,9 +16,10 @@
         </div>
     </div>
 </header>
+
 <!-- Page Content -->
-<?php
-if (isset($_SESSION['name'])){ $login_user = $_SESSION['name'];?>
+<?php if (isset($_SESSION['name'])){ $login_user = $_SESSION['name'];?>
+
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
@@ -29,8 +29,9 @@ if (isset($_SESSION['name'])){ $login_user = $_SESSION['name'];?>
             </div>
         </div>
     </div>
-<?php }else
-    {?>
+
+<?php }else {?>
+
     <div class="login">
         <div class = "container">
             <div class="wrapper">
@@ -57,5 +58,6 @@ if (isset($_SESSION['name'])){ $login_user = $_SESSION['name'];?>
             </div>
         </div>
     </div>
+
     <?php }?>
 <?php include 'footer.php'?>
