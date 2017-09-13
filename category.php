@@ -65,7 +65,7 @@ if(mysqli_num_rows($categories) <= 0)
                         <a href="#"><?=$art['author']?></a>
                         <?=strip_tags($art['date']) ?>
                     </p>
-                    <div style="background: url('/saves/images/<?php echo $art['image']; ?>');background-repeat: no-repeat;background-position: center; height: 250px;"></div>
+                    <div style="background: url('<?php echo $art['image']; ?>');background-repeat: no-repeat;background-position: center; height: 250px;"></div>
 
                 </div>
                 <hr>

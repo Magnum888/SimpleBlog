@@ -10,6 +10,21 @@ function test_input($data) {
     return $data;
 }
 if (isset($_POST['do_save'])){
+
+    if(empty($_FILES['file']['size']))  die('You did not select a file');
+    if($_FILES['file']['size'] > (2 * 1024 * 1024)) die('The file size should not exceed 2Mb');
+    $imageinfo = getimagesize($_FILES['file']['tmp_name']);
+    $arr = array('image/jpeg','image/gif','image/png');
+    if(!in_array($imageinfo['mime'],$arr)) echo ('The picture must be a format JPG, GIF or PNG');
+    else {
+        $upload_dir = '../saves/images/';
+        $image = $upload_dir.date('YmdHis').basename($_FILES['file']['name']);
+        $mov = move_uploaded_file($_FILES['file']['tmp_name'],$image);
+        if($mov) {
+            $image = stripslashes(strip_tags(trim($image)));
+        }
+        else echo 'An error occurred while loading the photo. Please try again';
+    }
     if (empty($_POST["author"])) {
         $errors[] = $err_author = "Please enter author!";
     }
@@ -25,7 +40,6 @@ if (isset($_POST['do_save'])){
     $preview = test_input($_POST["preview"]);
     $text = test_input($_POST["text"]);
     $category_id = test_input($_POST["category_id"]);
-    $image = 'null';
 
     if(empty($errors)){
         mysqli_query($connect, "INSERT INTO `article` (`author`, `title`, `preview`,`image`, `text`, `category_id`, `date`) VALUES ('$author', '$title', '$preview', '$image', '$text', '$category_id', NOW())");

@@ -54,7 +54,7 @@ if(mysqli_num_rows($articles) <= 0)
                             <?=$art['preview']?>
                         </p>
                         <div class="img-article text-center">
-                            <img class="img-fluid" src="/saves/images/<?php echo $art['image']; ?>" alt="">
+                            <img class="img-fluid" src="<?php echo $art['image']; ?>" alt="">
                         </div>
                         <div class="post-subtitle">
                             <?php echo $art['text']; ?>

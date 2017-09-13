@@ -21,7 +21,7 @@
 <?php if ($_SESSION['name'] == 'admin'):?>
     <!-- Page Content -->
     <div class='logup'>
-        <form action="admin.php" method="post" class="form-horizontal">
+        <form action="admin.php" method="post" enctype="multipart/form-data" class="form-horizontal">
             <fieldset>
                 <!-- Form Name -->
                 <legend>Add blog</legend>
@@ -45,7 +45,7 @@
                         <div style="color:red; font-weight: 700; margin-bottom: 10px;"><?php echo $err_title;?></div>
                     </div>
 
-<!--                     Category input-->
+                    <!--  Category input-->
                     <div class="form-group">
                         <span class="col-md-6 control-label">Category</span>
                         <div class="col-md-6 mx-auto">
@@ -54,6 +54,15 @@
                             <span><input class="" name="category_id" type="radio" value="3">Webdesign</span>
                         </div>
                         <div style="color:red; font-weight: 700; margin-bottom: 10px;"><?php echo $err_category_id;?></div>
+                    </div>
+
+                    <!-- Image input -->
+                    <div class="form-group">
+                        <span class="col-md-6 control-label">Image</span>
+                        <div class="col-md-6 mx-auto">
+                            <input class="form-control input-md" name="file" type="file">
+                        </div>
+                        <div style="color:red; font-weight: 700; margin-bottom: 10px;"><?php echo $err_title;?></div>
                     </div>
 
                     <!-- Preview input -->
