@@ -40,11 +40,11 @@ if (isset($_POST['do_save'])){
         $errors[] = $err_category_id = "Please input one category!";
     }
 
-    $author = test_input($_POST["author"]);
-    $title = test_input($_POST["title"]);
-    $preview = test_input($_POST["preview"]);
-    $text = test_input($_POST["text"]);
-    $category_id = test_input($_POST["category_id"]);
+    $author = $_POST["author"];
+    $title = $_POST["title"];
+    $preview = $_POST["preview"];
+    $text = $_POST["text"];
+    $category_id = $_POST["category_id"];
 
     if(empty($errors)){
 //        mysqli_query($connect, "INSERT INTO `article` (`author`, `title`, `preview`,`image`, `text`, `category_id`, `date`) VALUES ('$author', '$title', '$preview', '$image', '$text', '$category_id', NOW())");

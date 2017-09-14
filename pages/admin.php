@@ -18,12 +18,27 @@
     </header>
 
 <?php if ($_SESSION['name'] == 'admin'):?>
-    <!-- Page Content -->
+    <!--Button Navigation-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <button type="button" class="btn btn-outline-primary btn-lg btn-block rounded ">Info</button>
+            </div>
+            <div class="col-md-4 mx-auto">
+                <button type="button" class="btn btn-outline-primary btn-lg btn-block rounded">Info</button>
+            </div>
+            <div class="col-md-4 mx-auto">
+                <button type="button" class="btn btn-outline-primary btn-lg btn-block rounded">Info</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content add article -->
     <div class='logup'>
         <form action="admin.php" method="post" enctype="multipart/form-data" class="form-horizontal">
             <fieldset>
                 <!-- Form Name -->
-                <legend>Add blog</legend>
+                <legend>Add article</legend>
                 <div class="text-center">
 
                     <!-- Author input -->
@@ -87,7 +102,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" ></label>
                         <div class="col-md-8 mx-auto">
-                            <button class="btn btn-default" name="do_save" type="submit">Save blog</button>
+                            <button class="btn btn-default rounded" name="do_save" type="submit">Save blog</button>
                         </div>
                     </div>
                 </div>

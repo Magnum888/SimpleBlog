@@ -72,7 +72,7 @@ if (isset($_POST['do_post']))
     }
     if (empty($errors))
     {
-        mysqli_query($connect, "INSERT INTO `comments` (`author`, `nickname`, `email`, `text`, `pubdate`, `articles_id`) VALUES ('".mysqli_real_escape_string($connect,$_POST['name'])."', '".mysqli_real_escape_string($connect,$_POST['nickname'])."', '".mysqli_real_escape_string($connect,$_POST['email'])."', '".mysqli_real_escape_string($connect,$_POST['message'])."', NOW(), '".$art['id']."')" );
+        mysqli_query($connect, "INSERT INTO `comments` (`author`, `nickname`, `email`, `text`, `pubdate`, `articles_id`) VALUES ('".mysqli_real_escape_string($connect, $name)."', '".mysqli_real_escape_string($connect, $nickname)."', '".mysqli_real_escape_string($connect, $email)."', '".mysqli_real_escape_string($connect, $message)."', NOW(), '".$art['id']."')" );
         $comment_success = 'Comment add successful!!!';
         unset($_POST['name'], $_POST['nickname'], $_POST['email'], $_POST['message']);
 //                                            $url = 'article.php?id=' . $art['id'];

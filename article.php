@@ -75,11 +75,11 @@
                     <a class="add-comment-link btn btn-2" href="#form-comment">Add comment&#8595;</a>
                     <div>
                         <span>Comment by:</span>
-                        <span class="author-comment"><?php echo $comment['author']; ?></span>
+                        <span class="author-comment"><?php echo strip_tags($comment['author']); ?></span>
                         <span class="date-comment"><?php echo $comment['pubdate']; ?></span>
                     </div>
                     <div class="text-comment">
-                        <?php echo $comment['text']; ?>
+                        <?php echo strip_tags($comment['text']);?>
                     </div>
                 </div>
                 <hr>
