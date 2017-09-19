@@ -1,7 +1,6 @@
 <?php include '../includes/db.php';?>
 <?php require "../includes/config.php";?>
 <?php include '../navigation.php';?>
-<?php include '../models/adminAddBlogModel.php';?>
 
     <!-- Page Header -->
     <header class="masthead" style="background-image: url('/img/register-bg.jpg')">
@@ -18,96 +17,57 @@
     </header>
 
 <?php if ($_SESSION['name'] == 'admin'):?>
-    <!--Button Navigation-->
-    <div class="container">
+    <div class="container admin-page">
         <div class="row">
-            <div class="col-md-4 mx-auto">
-                <button type="button" class="btn btn-outline-primary btn-lg btn-block rounded ">Info</button>
+            <div class="col-12 col-lg-2">
+                <div class="list-group" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action blueviolet active" id="list-addArticle-list" data-toggle="list" href="#list-addArticle" role="tab" aria-controls="addArticle">Add article</a>
+                    <a class="list-group-item list-group-item-action blueviolet" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+                    <a class="list-group-item list-group-item-action blueviolet" id="list-users-list" data-toggle="list" href="#list-users" role="tab" aria-controls="users">Users</a>
+                    <a class="list-group-item list-group-item-action blueviolet" id="list-comments-list" data-toggle="list" href="#list-comments" role="tab" aria-controls="comments">Comments</a>
+                    <a class="list-group-item list-group-item-action blueviolet" id="list-deleteArticle-list" data-toggle="list" href="#list-deleteArticle" role="tab" aria-controls="deleteArticle">Delete article</a>
+                </div>
             </div>
-            <div class="col-md-4 mx-auto">
-                <button type="button" class="btn btn-outline-primary btn-lg btn-block rounded">Info</button>
-            </div>
-            <div class="col-md-4 mx-auto">
-                <button type="button" class="btn btn-outline-primary btn-lg btn-block rounded">Info</button>
+            <div class="col-12 col-lg-10">
+                <div class="tab-content" id="nav-tabContent">
+
+                    <!-- Content add article -->
+                    <div class="tab-pane fade show active" id="list-addArticle" role="tabpanel" aria-labelledby="list-addArticle-list">
+                        <?php include '../models/adminAddBlogModel.php';?>
+                        <?php include 'adminAddArticle.php';?>
+                    </div>
+                    <!-- END Content add article -->
+
+                    <!-- Content Profile -->
+                    <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                        <?php include '../models/adminProfileModel.php';?>
+                        <?php include 'adminProfile.php'?>
+                    </div>
+                    <!-- END Content Profile -->
+
+                    <!--All Users. Delete users-->
+                    <div class="tab-pane fade" id="list-users" role="tabpanel" aria-labelledby="list-users-list">
+                        <?php include '../models/adminAllUsersModel.php';?>
+                        <?php include 'adminAllUsers.php';?>
+                    </div>
+                    <!-- END All Users. Delete users-->
+
+                    <!--All Comments. Delete comments-->
+                    <div class="tab-pane fade" id="list-comments" role="tabpanel" aria-labelledby="list-comments-list">
+                        <?php include '../models/adminCommentsModel.php';?>
+                        <?php include 'adminComments.php';?>
+                    </div>
+                    <!-- END Comments. Delete comments-->
+
+                    <!--All Article. Delete article-->
+                    <div class="tab-pane fade" id="list-deleteArticle" role="tabpanel" aria-labelledby="list-deleteArticle-list">
+                        <?php include '../models/adminArticleModel.php';?>
+                        <?php include 'adminArticle.php';?>
+                    </div>
+                    <!-- END All Article. Delete article-->
+                </div>
             </div>
         </div>
-    </div>
-
-    <!-- Content add article -->
-    <div class='logup'>
-        <form action="admin.php" method="post" enctype="multipart/form-data" class="form-horizontal">
-            <fieldset>
-                <!-- Form Name -->
-                <legend>Add article</legend>
-                <div class="text-center">
-
-                    <!-- Author input -->
-                    <div class="form-group">
-                        <label class="col-md-6 control-label" for="author">Author</label>
-                        <div class="col-md-6 mx-auto">
-                            <input class="form-control input-md" name="author" type="text" placeholder="Author" size="20" maxlength="20" required>
-                        </div>
-                        <div style="color:red; font-weight: 700; margin-bottom: 10px;"><?php echo $err_author;?></div>
-                    </div>
-
-                    <!-- Title input -->
-                    <div class="form-group">
-                        <label class="col-md-6 control-label" for="title">Title</label>
-                        <div class="col-md-6 mx-auto">
-                            <input class="form-control input-md" name="title" type="text" placeholder="Title" size="20" maxlength="20" required>
-                        </div>
-                        <div style="color:red; font-weight: 700; margin-bottom: 10px;"><?php echo $err_title;?></div>
-                    </div>
-
-                    <!--  Category input-->
-                    <div class="form-group">
-                        <span class="col-md-6 control-label">Category</span>
-                        <div class="col-md-6 mx-auto">
-                            <span><input class="" name="category_id" type="radio" value="1">IT Techologies</span>
-                            <span><input class="" name="category_id" type="radio" value="2">Advetures</span>
-                            <span><input class="" name="category_id" type="radio" value="3">Webdesign</span>
-                        </div>
-                        <div style="color:red; font-weight: 700; margin-bottom: 10px;"><?php echo $err_category_id;?></div>
-                    </div>
-
-                    <!-- Image input -->
-                    <div class="form-group">
-                        <span class="col-md-6 control-label">Image</span>
-                        <div class="col-md-6 mx-auto">
-                            <input class="form-control input-md" name="file" type="file">
-                        </div>
-                        <div style="color:red; font-weight: 700; margin-bottom: 10px;"><?php echo $err_title;?></div>
-                    </div>
-
-                    <!-- Preview input -->
-                    <div class="form-group">
-                        <label class="col-md-10 control-label" for="preview">Preview</label>
-                        <div class="col-md-10 mx-auto">
-                            <textarea name="preview" rows="3" class="form-control form-input-message reset" type="text" placeholder="Text preview" required><?php echo htmlspecialchars($_POST['preview'])?></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Text input -->
-                    <div class="form-group">
-                        <label class="col-md-10 control-label" for="text">Text blog</label>
-                        <div class="col-md-10 mx-auto">
-                            <textarea name="text" rows="15" class="form-control form-input-message reset" type="text" placeholder="Text blog" required><?php echo htmlspecialchars($_POST['text'])?></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Error blog -->
-                    <h3 style="color: #8a2be2; font-weight: 700; margin-bottom: 10px;"><?php echo $successful_txt;?></h3>
-
-                    <!-- Button (Double) -->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" ></label>
-                        <div class="col-md-8 mx-auto">
-                            <button class="btn btn-default rounded" name="do_save" type="submit">Save blog</button>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
     </div>
 <?php endif ?>
 <?php include 'footer.php'?>

@@ -1,4 +1,7 @@
 AddDefaultCharset UTF-8
+php_flag session.use_only_cookies on
+#php_value session.gc_maxlifetime 7200
+#php_value session.cookie_lifetime 7200
 #RewriteEngine on
 #RewriteBase /
 #RewriteCond %{REQUEST_FILENAME} -s [OR]

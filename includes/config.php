@@ -1,6 +1,7 @@
 <?php
 $config = array(
     'title' => 'Kovel Blog',
+    'subtitle' => 'A Blog by Kovel',
     'description' => 'Kovel Blog',
     'url' => '/',
     'image' => '../img/header-bg.jpg',
