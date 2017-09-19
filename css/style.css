@@ -333,6 +333,10 @@ header.masthead {
 .error-login{
   color: red;
 }
+#form-comment > div > div > div > div > form > div > div:nth-child(1) > div.input-group > span.fx-user{
+  padding-left: 15px;
+  padding-right: 15px;
+}
 .panel-body .fill:hover,
 .panel-body .fill:focus {
   box-shadow: inset 0 0 0 2em var(--hover);

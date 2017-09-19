@@ -9,7 +9,7 @@
     <header class="masthead" style="background-image: url('img/one-article.jpg')">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="col-lg-12 col-md-12 mx-auto">
                     <div class="post-heading">
                         <h1>Blog</h1>
                         <h2 class="subheading">Sorry this category not found </h2>
@@ -25,7 +25,7 @@
     <header class="masthead" style="background-image: url('img/one-article.jpg')">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="col-lg-12 col-md-12 mx-auto">
                     <div class="post-heading">
                         <h1><?php echo $cat['title']?></h1>
                     </div>
@@ -39,7 +39,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-10 col-md-10 mx-auto">
+            <div class="col-lg-12 col-md-12 mx-auto">
                 <div class="post-preview">
                     <a href="/article.php?id=<?php echo $art['id']; ?>">
                         <h2 class="post-title">

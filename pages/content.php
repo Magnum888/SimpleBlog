@@ -16,12 +16,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="col-lg-12 col-md-12 mx-auto">
             <p class="last-blogs">Last blogs</p>
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="col-lg-10 col-md-10 mx-auto">
             <div class="row new-article">
                 <div class="owl-carousel owl-theme">
                     <?php foreach ($articles as $art)
@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="col-lg-12 col-md-12 mx-auto">
             <? foreach ($data as $row): ?>
                 <div class="post-preview">
                     <a href="/article.php?id=<?php echo $row['id']; ?>">

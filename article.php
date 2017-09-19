@@ -100,7 +100,7 @@
                             <div class="panel-body">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                        <span class="input-group-addon fx-user"><i class="fa fa-user" aria-hidden="true"></i></span>
                                         <input type="text" name="name" placeholder="Name" class="form-control form-input-name reset" value="<?php echo htmlspecialchars($_POST['name'])?>" autofocus="autofocus">
                                     </div>
                                     <div class="error-comment"><?php echo $nameErr;?></div>
