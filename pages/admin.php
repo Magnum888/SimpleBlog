@@ -1,6 +1,9 @@
 <?php include '../includes/db.php';?>
 <?php require "../includes/config.php";?>
 <?php include '../navigation.php';?>
+<?php include '../models/adminModel.php';?>
+
+<?php if ($_SESSION['name'] == 'admin001' && $admin_blog['admin'] == 1):?>
 
     <!-- Page Header -->
     <header class="masthead" style="background-image: url('/img/register-bg.jpg')">
@@ -16,7 +19,6 @@
         </div>
     </header>
 
-<?php if ($_SESSION['name'] == 'admin'):?>
     <div class="container admin-page">
         <div class="row">
             <div class="col-12 col-lg-2">
@@ -69,6 +71,21 @@
             </div>
         </div>
     </div>
+<?php else: ?>
+    <header class="masthead" style="background-image: url('/img/register-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="site-heading">
+                        <h1><?php echo $config['title'];?></h1>
+                        <h3 class="subheading">Admin panel</h3>
+                        <p class="subheading">You are not authorized to view this page</p>
+                        <p class="subheading-error">Return main <a href="/">page</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 <?php endif ?>
 <?php include 'footer.php'?>
 

@@ -6,7 +6,7 @@ $comments= mysqli_query($connect, "SELECT * FROM `comments` WHERE `articles_id` 
 $nameErr = $nicknameErr = $emailErr = $messageErr = $comment_success = "";
 $form_key = 'comment_to_article';
 $csrf_token = '';
-$user_id = 2;
+
 $errors = array();
 function test_input($data){
     $data = trim($data);
@@ -73,6 +73,34 @@ if (isset($_POST['do_post']))
     if (empty($errors))
     {
         mysqli_query($connect, "INSERT INTO `comments` (`author`, `nickname`, `email`, `text`, `pubdate`, `articles_id`) VALUES ('".mysqli_real_escape_string($connect, $name)."', '".mysqli_real_escape_string($connect, $nickname)."', '".mysqli_real_escape_string($connect, $email)."', '".mysqli_real_escape_string($connect, $message)."', NOW(), '".$art['id']."')" );
+        $comment_success = 'Comment add successful!!!';
+        unset($_POST['name'], $_POST['nickname'], $_POST['email'], $_POST['message']);
+//                                            $url = 'article.php?id=' . $art['id'];
+//                                            header('Location:  /');
+    }
+}
+
+if (isset($_POST['save_comment']))
+{
+    $userProf= mysqli_query($connect, "SELECT * FROM `users` ORDER BY `id` DESC ");
+    $prof = mysqli_fetch_assoc($userProf);
+    $name = $_SESSION["name"];
+    $email = $_SESSION["email"];
+    $user_id = $_SESSION["id"];
+
+    if (empty($_POST["nickname"])) {
+        $errors[] = $nicknameErr = "Please enter nickname!";
+    } else {
+        $nickname = test_input($_POST["nickname"]);
+    }
+    if (empty($_POST["message"])) {
+        $errors[] = $messageErr = "Please enter comment!";
+    } else {
+        $message = test_input($_POST["message"]);
+    }
+    if (empty($errors))
+    {
+        mysqli_query($connect, "INSERT INTO `comments` (`author`, `nickname`, `email`, `text`, `pubdate`, `articles_id`, `user_id`) VALUES ('".mysqli_real_escape_string($connect, $name)."', '".mysqli_real_escape_string($connect, $nickname)."', '".mysqli_real_escape_string($connect, $email)."', '".mysqli_real_escape_string($connect, $message)."', NOW(), '".$art['id']."', '".$user_id."')" );
         $comment_success = 'Comment add successful!!!';
         unset($_POST['name'], $_POST['nickname'], $_POST['email'], $_POST['message']);
 //                                            $url = 'article.php?id=' . $art['id'];

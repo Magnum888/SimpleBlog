@@ -1,6 +1,4 @@
 <?php
-if ($_SESSION['name'] != 'admin'){ echo "You do not have permissions to view this page";}
-
 $errors = array();
 $err_author = '';
 $err_title = '';

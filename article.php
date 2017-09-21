@@ -96,6 +96,7 @@
                             <h4 class="title-comments">Comment: </h4>
                         </div>
                         <div style="color:green; font-weight: 700; margin-bottom: 10px;"><?php echo $comment_success;?></div>
+                        <?php if (!isset($_SESSION['name'])) {?>
                         <form class="form-comments" action="article.php?id=<?php echo htmlspecialchars($art['id'])?>#form-comment" method="POST">
                             <div class="panel-body">
                                 <div class="form-group">
@@ -108,7 +109,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user-plus" aria-hidden="true"></i></span>
-                                        <input type="text" name="nickname" placeholder="Nickname" class="form-control form-input-nickname reset" value="<?php echo htmlspecialchars($_POST['nickname'])?>" autofocus="autofocus">
+                                        <input type="text" name="nickname" placeholder="Nickname" class="form-control form-input-nickname reset" value="<?php echo htmlspecialchars($_POST['nickname'])?>">
                                     </div>
                                     <div class="error-comment"><?php echo $nicknameErr;?></div>
                                 </div>
@@ -133,6 +134,37 @@
                                 </div>
                             </div>
                         </form>
+                        <?php }else{ ?>
+                            <form class="form-comments" action="article.php?id=<?php echo htmlspecialchars($art['id'])?>#form-comment" method="POST">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon fx-user"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                            <span class="form-control"><?php echo $_SESSION['name']?></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user-plus" aria-hidden="true"></i></span>
+                                            <input type="text" name="nickname" placeholder="Nickname" class="form-control form-input-nickname reset" value="<?php echo htmlspecialchars($_POST['nickname'])?>">
+                                        </div>
+                                        <div class="error-comment"><?php echo $nicknameErr;?></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-comment"></i></span>
+                                            <textarea name="message" rows="6" class="form-control form-input-message reset" type="text" placeholder="Text comment"><?php echo htmlspecialchars($_POST['message'])?></textarea>
+                                        </div>
+                                        <div class="error-comment"><?php echo htmlspecialchars($messageErr);?></div>
+                                    </div>
+                                    <input type="hidden" name="csrf" value="<?php echo $csrf_token; ?>" />
+                                    <div class="col-lg-12 col-md-12 mx-auto">
+                                        <button type="submit" name="save_comment" class="btn fill pull-right">Send <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                        <button type="reset" value="Reset" name="reset" class="btn fill sub">Reset <i class="fa fa-refresh" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

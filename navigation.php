@@ -75,7 +75,7 @@
                 </li>
                 <?php }?>
 
-                <?php if($_SESSION['name'] == 'admin')
+                <?php if($_SESSION['name'] == 'admin001')
                     {?>
                         <li class="nav-item">
                             <a class="nav-link" href="/pages/admin.php">Admin</a>
