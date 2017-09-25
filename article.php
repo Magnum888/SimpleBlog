@@ -135,6 +135,13 @@
                             </div>
                         </form>
                         <?php }else{ ?>
+                            <?php if($_SESSION['ban'] == 1):;?>
+                            <div class="comments-article col-lg-12 col-md-12 mx-auto">
+                                <div>
+                                    <p style="color: red">Due to violation of the rules of using this site, you have been blocked. If you do not agree, please write to the email address kovel.blog@i.ua</p>
+                                </div>
+                            </div>
+                            <?php else:?>
                             <form class="form-comments" action="article.php?id=<?php echo htmlspecialchars($art['id'])?>#form-comment" method="POST">
                                 <div class="panel-body">
                                     <div class="form-group">
@@ -164,6 +171,7 @@
                                     </div>
                                 </div>
                             </form>
+                            <?php endif;?>
                         <?php } ?>
                     </div>
                 </div>

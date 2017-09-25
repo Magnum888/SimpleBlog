@@ -24,8 +24,11 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <h4>Hello <?php echo $login_user; ?></h4>
-                <p>Go to the<a href="/"> Main page </a>
-                <p>Go to the<a href="profile.php"> Profile page </a>
+                <p>Go to the<a href="/"> Main page </a></p>
+                <p>Go to the<a href="profile.php"> Profile page </a></p>
+                <?php if($_SESSION['name'] == 'admin001'){?>
+                <p>Go to the<a class="nav-link" href="admin.php">Admin page</a></p>
+                <?php }?>
             </div>
         </div>
     </div>

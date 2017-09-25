@@ -13,6 +13,9 @@
         <?php if($rowUserComments <= 0) {echo $absentComment;}
         while ($userComment = mysqli_fetch_assoc($userComments)) { ?>
             <div class="comments-article col-lg-12 col-md-12 mx-auto">
+                <form action="admin.php?id=<?php echo $userComment['id']?>" method="POST">
+                    <button type="submit" name="delete_comment" class="btn btn-danger rounded">Delete comment</button>
+                </form>
                 <div>
                     <span>Comment written at:</span>
                     <span class="date-comment"><?php echo $userComment['pubdate']; ?></span>
@@ -20,9 +23,6 @@
                 <div class="text-comment">
                     <?php echo strip_tags($userComment['text']);?>
                 </div>
-                <form action="admin.php?id=<?php echo $userComment['id']?>" method="POST">
-                    <button type="submit" name="delete_comment" class="btn btn-danger rounded">Delete comment</button>
-                </form>
             </div>
             <hr>
         <?php } ?>
