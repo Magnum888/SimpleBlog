@@ -1,9 +1,11 @@
-<?php session_start()?>
 <?php
 $absentComment = "<div>Do`t have comments</div>";
-//$userProfile= mysqli_query($connect, "SELECT * FROM `users` ORDER BY `id` DESC ");
-//$profile = mysqli_fetch_assoc($userProfile);
-$userComments = mysqli_query($connect, "SELECT * FROM `comments` WHERE `articles_id` = " . (int) $profile['id'] . " ORDER BY `id` DESC ");
+$user_id = (int)$_SESSION['id'];
+$userComments = mysqli_query($connect, "SELECT * FROM `comments` WHERE `user_id` = '$user_id'". "ORDER BY `id` DESC");
 $rowUserComments = mysqli_num_rows($userComments);
-$userComment = mysqli_fetch_assoc($userComments);
+if(isset($_POST['delete_comment'])){
+$delete = (int) $_GET['id'];
+mysqli_query($connect, "DELETE FROM `comments` WHERE `id` = '$delete'");
+$delete_success = 'Comment delete successful, it will be removed soon';
+}
 ?>
