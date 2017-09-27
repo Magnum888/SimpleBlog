@@ -33,7 +33,7 @@
         </div>
     </div>
 </footer>
-
+<a href="#" class="scrollup" style="width:80px;height:80px;opacity:0.6;position:fixed;bottom:60px;right:35px;display:none;text-indent:-9999px;background: url('/img/arrow-up.png') no-repeat;">Наверх</a>
 </body>
 
 </html>
@@ -49,3 +49,4 @@
 <script src="../js/vb.js"></script>
 <script src="../js/ckedior.js"></script>
 <script src="../js/article.js"></script>
+<script src="../js/scroll_arrow_up.js"></script>
