@@ -50,3 +50,4 @@
 <script src="../js/ckedior.js"></script>
 <script src="../js/article.js"></script>
 <script src="../js/scroll_arrow_up.js"></script>
+<script src="../js/ajax_profile.js"></script>
