@@ -10,4 +10,9 @@ if(isset($_POST['delete_comment'])){
     mysqli_query($connect, "DELETE FROM `comments` WHERE `id` = '$delete'");
     $delete_success = 'Comment delete successful, it will be removed soon';
 }
+if(isset($_POST['id'])){
+    $delete = (int) $_POST['id'];
+    mysqli_query($connect, "DELETE FROM `comments` WHERE `id` = '$delete'");
+    $delete_success = 'Comment delete successful, it will be removed soon';
+}
 ?>
