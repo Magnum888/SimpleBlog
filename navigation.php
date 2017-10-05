@@ -34,7 +34,7 @@
 
     <!-- Custom styles -->
     <link href="/css/style.css" rel="stylesheet">
-
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 
 <body style="background-image: url('/img/white-wood.jpg')">

@@ -2,6 +2,7 @@
 <?php include 'includes/db.php';?>
 <?php include 'navigation.php' ?>
 <?php include 'models/articleModel.php' ?>
+<?php include 'models/crudActionModel.php' ?>
 
 <?php if(mysqli_num_rows($articles) <= 0) { ?>
 
@@ -60,8 +61,8 @@
         </div>
     </article>
 
-    <!-- Post comments-->
-    <article>
+    <!-- Show comments-->
+    <article id="show-art">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 mx-auto">
@@ -71,7 +72,7 @@
             </div>
             <?php if(mysqli_num_rows($comments) <= 0) {echo "Do`t have comments";}
             while ($comment = mysqli_fetch_assoc($comments)) { ?>
-                <div class="comments-article col-lg-12 col-md-12 mx-auto">
+                <div class="comments-article col-lg-12 col-md-12 mx-auto" id="comment_<?php echo htmlspecialchars($comment['id'])?>">
                     <a class="add-comment-link btn btn-2" href="#form-comment">Add comment&#8595;</a>
                     <div>
                         <span>Comment by:</span>
@@ -81,11 +82,17 @@
                     <div class="text-comment">
                         <?php echo strip_tags($comment['text']);?>
                     </div>
+                    <?php if ($comment['author']===$_SESSION['name']){?>
+                        <button class="btnEditAction" name="edit" onClick="showEditBox(this,<?php echo $comment["id"]; ?>)">Edit</button>
+                        <button class="btnDeleteAction" name="delete" onClick="callCrudAction('delete',<?php echo $comment["id"]; ?>)">Delete</button>
+                    <?php }?>
                 </div>
                 <hr>
             <?php } ?>
         </div>
     </article>
+
+    <!-- Post comments-->
 
     <article id="form-comment">
         <div class="container">
@@ -142,7 +149,7 @@
                                 </div>
                             </div>
                             <?php else:?>
-                            <form class="form-comments" action="article.php?id=<?php echo htmlspecialchars($art['id'])?>#form-comment" method="POST">
+                            <form class="form-comments comments-ajax">
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <div class="input-group">
@@ -153,21 +160,22 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user-plus" aria-hidden="true"></i></span>
-                                            <input type="text" name="nickname" placeholder="Nickname" class="form-control form-input-nickname reset" value="<?php echo htmlspecialchars($_POST['nickname'])?>">
+                                            <input type="text" name="nickname" id="txtnickname" placeholder="Nickname" class="form-control form-input-nickname reset" value="<?php echo htmlspecialchars($_POST['nickname'])?>">
                                         </div>
                                         <div class="error-comment"><?php echo $nicknameErr;?></div>
                                     </div>
                                     <div class="form-group">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-comment"></i></span>
-                                            <textarea name="message" rows="6" class="form-control form-input-message reset" type="text" placeholder="Text comment"><?php echo htmlspecialchars($_POST['message'])?></textarea>
+                                            <textarea name="message" rows="6" id="txtmessage" class="form-control form-input-message reset" type="text" placeholder="Text comment"><?php echo htmlspecialchars($_POST['message'])?></textarea>
                                         </div>
                                         <div class="error-comment"><?php echo htmlspecialchars($messageErr);?></div>
                                     </div>
                                     <input type="hidden" name="csrf" value="<?php echo $csrf_token; ?>" />
                                     <div class="col-lg-12 col-md-12 mx-auto">
-                                        <button type="submit" name="save_comment" class="btn fill pull-right">Send <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                        <button type="submit" name="save_comment" class="btn fill pull-right" onClick="callCrudAction('add','')">Send <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                                         <button type="reset" value="Reset" name="reset" class="btn fill sub">Reset <i class="fa fa-refresh" aria-hidden="true"></i></button>
+                                        <img src="img/LoaderIcon.gif" id="loaderIcon" style="display:none" />
                                     </div>
                                 </div>
                             </form>
@@ -182,49 +190,59 @@
 <?php } ?>
 <script>
     function showEditBox(editobj,id) {
-        $('#frmAdd').hide();
+        $('.comments-ajax').hide();
+        $('.btnDeleteAction').hide();
+        $('.btnEditAction').hide();
         $(editobj).prop('disabled','true');
-        var currentMessage = $("#message_" + id + " .message-content").html();
-        var editMarkUp = '<textarea rows="5" cols="80" id="txtmessage_'+id+'">'+currentMessage+'</textarea><button name="ok" onClick="callCrudAction(\'edit\','+id+')">Save</button><button name="cancel" onClick="cancelEdit(\''+currentMessage+'\','+id+')">Cancel</button>';
-        $("#message_" + id + " .message-content").html(editMarkUp);
+        var currentMessage = $("#comment_" + id + " .text-comment").html();
+        var editMarkUp = '<div class="form-group"><div class="input-group"><textarea rows="6" cols="20" id="txtmessage_'+id+'" class="form-control">'+currentMessage+'</textarea></div></div><button name="ok" onClick="callCrudAction(\'edit\','+id+')">Save</button><button name="cancel" onClick="cancelEdit(\''+currentMessage+'\','+id+')">Cancel</button>';
+        $("#comment_" + id + " .text-comment").html(editMarkUp);
+
     }
     function cancelEdit(message,id) {
-        $("#message_" + id + " .message-content").html(message);
-        $('#frmAdd').show();
+        $("#comment_" + id + " .text-comment").html(message);
+        $('.comments-ajax').show();
+        $('.btnDeleteAction').show();
+        $('.btnEditAction').show();
     }
     function callCrudAction(action,id) {
         $("#loaderIcon").show();
+        $('.btnDeleteAction').show();
+        $('.btnEditAction').show();
         var queryString;
         switch(action) {
             case "add":
-                queryString = 'action='+action+'&txtmessage='+ $("#txtmessage").val();
+                //queryString = 'action='+action+'message='+$("#txtmessage").val()+'nickname='+$("#txtnickname").val();
+                queryString = {action:'action', message:$("#txtmessage").val(), nickname:$("#txtnickname").val()};
                 break;
             case "edit":
-                queryString = 'action='+action+'&message_id='+ id + '&txtmessage='+ $("#txtmessage_"+id).val();
+                queryString = 'action='+action+'&comment_id='+ id + '&txtmessage='+ $("#txtmessage_"+id).val();
                 break;
             case "delete":
-                queryString = 'action='+action+'&message_id='+ id;
+                queryString = 'action='+action+'&comment_id='+ id;
                 break;
         }
         jQuery.ajax({
-            url: "crud_action.php",
+            url: "article.php",
+            dataType:"text",
             data:queryString,
             type: "POST",
             success:function(data){
                 switch(action) {
                     case "add":
-                        $("#comment-list-box").append(data);
+                        $("#show-art").append(data);
                         break;
                     case "edit":
-                        $("#message_" + id + " .message-content").html(data);
-                        $('#frmAdd').show();
-                        $("#message_"+id+" .btnEditAction").prop('disabled','');
+                        $("#comment_" + id + " .text-comment").html(data);
+                        $('.comments-ajax').show();
+                        $("#comment_"+id+" .btnEditAction").prop('disabled','');
                         break;
                     case "delete":
-                        $('#message_'+id).fadeOut();
+                        $('#comment_'+id).fadeOut();
                         break;
                 }
                 $("#txtmessage").val('');
+                $("#txtnickname").val('');
                 $("#loaderIcon").hide();
             },
             error:function (){}
