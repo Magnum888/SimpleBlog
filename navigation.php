@@ -22,8 +22,9 @@
     <link href="/includes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Carousel -->
-    <link href="/css/owl.theme.default.min.css" rel="stylesheet" >
-    <link href="/css/owl.carousel.min.css" rel="stylesheet" >
+<!--    <link href="/css/owl.theme.default.min.css" rel="stylesheet" >-->
+<!--    <link href="/css/owl.carousel.min.css" rel="stylesheet" >-->
+    <link href="/includes/swiper/swiper.min.css" rel="stylesheet" >
 
     <!-- Custom fonts -->
     <link href="/includes/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -34,10 +35,11 @@
 
     <!-- Custom styles -->
     <link href="/css/style.css" rel="stylesheet">
+<!--    <link href="/css/about.css" rel="stylesheet">-->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 
-<body style="background-image: url('/img/white-wood.jpg')">
+<body style="background-image: url('/img/2.jpg')">
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -53,7 +55,7 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/pages/about.php">About me</a>
+                    <a class="nav-link" href="/pages/about.php">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/#posts">Posts category</a>

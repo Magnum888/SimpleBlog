@@ -2,7 +2,6 @@
 <?php include 'includes/db.php';?>
 <?php include 'navigation.php' ?>
 <?php include 'models/articleModel.php' ?>
-<?php include 'models/crudActionModel.php' ?>
 
 <?php if(mysqli_num_rows($articles) <= 0) { ?>
 
@@ -149,7 +148,7 @@
                                 </div>
                             </div>
                             <?php else:?>
-                            <form class="form-comments comments-ajax">
+                            <form class="form-comments comments-ajax" action="article.php?id=<?php echo htmlspecialchars($art['id'])?>#form-comment" method="POST">
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <div class="input-group">
@@ -173,7 +172,7 @@
                                     </div>
                                     <input type="hidden" name="csrf" value="<?php echo $csrf_token; ?>" />
                                     <div class="col-lg-12 col-md-12 mx-auto">
-                                        <button type="submit" name="save_comment" class="btn fill pull-right" onClick="callCrudAction('add','')">Send <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                        <button type="submit" name="save_comment" class="btn fill pull-right">Send <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                                         <button type="reset" value="Reset" name="reset" class="btn fill sub">Reset <i class="fa fa-refresh" aria-hidden="true"></i></button>
                                         <img src="img/LoaderIcon.gif" id="loaderIcon" style="display:none" />
                                     </div>
@@ -188,65 +187,4 @@
     </article>
     <hr>
 <?php } ?>
-<script>
-    function showEditBox(editobj,id) {
-        $('.comments-ajax').hide();
-        $('.btnDeleteAction').hide();
-        $('.btnEditAction').hide();
-        $(editobj).prop('disabled','true');
-        var currentMessage = $("#comment_" + id + " .text-comment").html();
-        var editMarkUp = '<div class="form-group"><div class="input-group"><textarea rows="6" cols="20" id="txtmessage_'+id+'" class="form-control">'+currentMessage+'</textarea></div></div><button name="ok" onClick="callCrudAction(\'edit\','+id+')">Save</button><button name="cancel" onClick="cancelEdit(\''+currentMessage+'\','+id+')">Cancel</button>';
-        $("#comment_" + id + " .text-comment").html(editMarkUp);
-
-    }
-    function cancelEdit(message,id) {
-        $("#comment_" + id + " .text-comment").html(message);
-        $('.comments-ajax').show();
-        $('.btnDeleteAction').show();
-        $('.btnEditAction').show();
-    }
-    function callCrudAction(action,id) {
-        $("#loaderIcon").show();
-        $('.btnDeleteAction').show();
-        $('.btnEditAction').show();
-        var queryString;
-        switch(action) {
-            case "add":
-                //queryString = 'action='+action+'message='+$("#txtmessage").val()+'nickname='+$("#txtnickname").val();
-                queryString = {action:'action', message:$("#txtmessage").val(), nickname:$("#txtnickname").val()};
-                break;
-            case "edit":
-                queryString = 'action='+action+'&comment_id='+ id + '&txtmessage='+ $("#txtmessage_"+id).val();
-                break;
-            case "delete":
-                queryString = 'action='+action+'&comment_id='+ id;
-                break;
-        }
-        jQuery.ajax({
-            url: "article.php",
-            dataType:"text",
-            data:queryString,
-            type: "POST",
-            success:function(data){
-                switch(action) {
-                    case "add":
-                        $("#show-art").append(data);
-                        break;
-                    case "edit":
-                        $("#comment_" + id + " .text-comment").html(data);
-                        $('.comments-ajax').show();
-                        $("#comment_"+id+" .btnEditAction").prop('disabled','');
-                        break;
-                    case "delete":
-                        $('#comment_'+id).fadeOut();
-                        break;
-                }
-                $("#txtmessage").val('');
-                $("#txtnickname").val('');
-                $("#loaderIcon").hide();
-            },
-            error:function (){}
-        });
-    }
-</script>
 <?php include 'pages/footer.php'?>

@@ -43,6 +43,7 @@
 <script src="../includes/bootstrap/js/bootstrap.min.js"></script>
 <script src="../includes/owl.carousel.min.js"></script>
 <script src="../includes/ckeditor/ckeditor.js"></script>
+<script src="../includes/swiper/swiper.min.js"></script>
 
 <!-- Custom scripts for this template -->
 <script src="../js/blog.js"></script>
@@ -51,3 +52,6 @@
 <script src="../js/article.js"></script>
 <script src="../js/scroll_arrow_up.js"></script>
 <script src="../js/ajax_profile.js"></script>
+<script src="../js/ajax_article.js"></script>
+<script src="../js/parallax.js"></script>
+<script src="../js/swiper_onpage.js"></script>

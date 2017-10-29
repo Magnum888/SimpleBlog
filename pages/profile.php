@@ -48,9 +48,6 @@
                             <?php echo strip_tags($userComment['text']);?>
                         </div>
                         <a class="del-btn-profile" id="<?php echo htmlspecialchars($userComment['id'])?>" href="">Удалить запись</a>
-<!--                        <form action="profile.php?id=--><?php //echo htmlspecialchars($userComment['id'])?><!--" method="POST">-->
-<!--                            <button type="submit" name="delete_comment" class="btn btn-danger rounded">Delete comment</button>-->
-<!--                        </form>-->
                     </div>
                     <hr>
                 <?php } ?>
